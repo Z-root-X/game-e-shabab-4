@@ -230,61 +230,105 @@
 
         /* --- AUCTION (Clean) --- */
         .auction-layout {
-            display: grid; grid-template-columns: 1fr 350px; gap: 2rem;
-            background: rgba(20,25,35,0.5); border: 1px solid var(--border-color);
-            border-radius: 20px; overflow: hidden; min-height: 500px;
-        }
-        .player-visual {
-            background: #0e1016; display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
-        }
-        .player-img { height: 100%; width: 100%; object-fit: cover; opacity: 0.8; }
-        .player-info-panel {
-            padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
-            background: rgba(255,255,255,0.02); border-left: 1px solid var(--border-color);
+            display: grid; grid-template-columns: 400px 1fr; gap: 0;
+            background: rgba(15, 20, 30, 0.8); border: 1px solid var(--border-color);
+            border-radius: 24px; overflow: hidden; min-height: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;
         }
         
-        .auction-tag { color: var(--accent-primary); font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
-        .auction-name { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; line-height: 1.1; margin-bottom: 2rem; }
+        /* Decorative glow behind card */
+        .auction-layout::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.05), transparent 60%);
+            z-index: -1; animation: pulse-bg 5s infinite alternate;
+        }
         
-        .stat-row { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; }
-        .stat-label { color: var(--text-muted); font-size: 0.9rem; }
-        .stat-val { font-weight: 700; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; }
-        .bid-val { color: var(--accent-secondary); font-size: 1.5rem; }
+        @keyframes pulse-bg { 0% { opacity: 0.5; } 100% { opacity: 1; } }
 
-        .auction-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
-        .ctrl-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color);
-            color: white; padding: 1rem; cursor: pointer; transition: 0.2s;
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1px;
+        .player-visual {
+            background: linear-gradient(180deg, #0f1520 0%, #050510 100%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; border-right: 1px solid var(--border-color);
+            padding: 2rem;
         }
-        .ctrl-btn:hover { background: rgba(255,255,255,0.1); }
-        .btn-sold { background: var(--danger); border-color: var(--danger); grid-column: span 2; }
-        .btn-bid { background: var(--accent-primary); color: #000; border-color: var(--accent-primary); grid-column: span 2; }
+        
+        .player-img-wrapper {
+            width: 100%; height: 100%; max-height: 450px;
+            border-radius: 16px; overflow: hidden; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .player-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .player-visual:hover .player-img { transform: scale(1.05); }
+
+        .player-info-panel {
+            padding: 3rem; display: flex; flex-direction: column; justify-content: space-between;
+            position: relative; background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
+        }
+
+        .player-header { margin-bottom: 2rem; }
+        .auction-tag { 
+            display: inline-block; background: var(--accent-secondary); color: white;
+            font-weight: 700; letter-spacing: 1px; font-size: 0.8rem; 
+            padding: 6px 16px; border-radius: 4px; margin-bottom: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .auction-name { 
+            font-family: 'Orbitron', sans-serif; font-size: 3.5rem; line-height: 1; 
+            margin-bottom: 0.5rem; background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .auction-quote { font-style: italic; color: var(--text-muted); font-size: 1.1rem; border-left: 3px solid var(--accent-primary); padding-left: 1rem; }
+
+        .stats-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; 
+            margin-bottom: 2rem; padding: 1.5rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .stat-item { text-align: left; }
+        .stat-label { color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .stat-val { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-white); }
+        .bid-active { color: var(--accent-primary); text-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+
+        .auction-controls { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: auto; }
+        .ctrl-btn {
+            padding: 1.2rem; border: 1px solid var(--border-color); cursor: pointer;
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 8px; color: white; background: rgba(255,255,255,0.05);
+        }
+        .ctrl-btn:hover { transform: translateY(-2px); }
+        .btn-nav { grid-column: span 1; }
+        .btn-nav:hover { background: rgba(255,255,255,0.1); }
+        
+        .btn-bid { 
+            grid-column: span 3; background: linear-gradient(90deg, var(--accent-primary), #0099ff); 
+            border: none; color: #000; font-weight: 800; font-size: 1.3rem;
+        }
+        .btn-bid:hover { box-shadow: 0 0 20px rgba(0, 243, 255, 0.4); }
+
+        .btn-sold { 
+            grid-column: span 3; background: linear-gradient(90deg, #ff4757, #ff0000); 
+            border: none; color: #fff; font-weight: 800; font-size: 1.3rem;
+        }
+        .btn-sold:hover { box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); }
 
         /* Sold Overlay */
         .sold-stamp-container {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 10;
-            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s;
+            position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 10;
+            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s;
+            backdrop-filter: blur(5px);
         }
         .sold-stamp {
-            font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; color: var(--danger);
-            border: 8px solid var(--danger); padding: 1rem 3rem; transform: rotate(-15deg) scale(1.5);
-            text-shadow: 0 0 30px rgba(255, 42, 42, 0.5); opacity: 0; transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; color: #ff4757;
+            border: 8px solid #ff4757; padding: 1rem 3rem; transform: rotate(-15deg) scale(1.5);
+            text-shadow: 0 0 30px rgba(255, 71, 87, 0.5); opacity: 0; transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .is-sold .sold-stamp-container { opacity: 1; }
+        .is-sold .sold-stamp-container { opacity: 1; pointer-events: auto; }
         .is-sold .sold-stamp { opacity: 1; transform: rotate(-15deg) scale(1); }
 
         /* Loader */
-        #loader {
-            position: fixed; inset: 0; background: var(--bg-dark); z-index: 2000;
-            display: flex; justify-content: center; align-items: center; transition: opacity 0.5s;
-        }
-        .spinner {
-            width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid var(--accent-primary); border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        #loader { position: fixed; inset: 0; background: var(--bg-dark); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--accent-primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Mobile */
@@ -295,8 +339,13 @@
             .timeline-content { width: 85%; text-align: left !important; margin-left: 2rem !important; }
             .timeline-line { left: 10px; }
             .timeline-dot { left: 10px; }
-            .auction-layout { grid-template-columns: 1fr; }
-            .player-visual { height: 300px; }
+            
+            .auction-layout { grid-template-columns: 1fr; height: auto; min-height: auto; }
+            .player-visual { height: 350px; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .player-info-panel { padding: 1.5rem; }
+            .auction-name { font-size: 2rem; }
+            .auction-controls { grid-template-columns: 1fr 1fr; }
+            .btn-bid, .btn-sold { grid-column: span 2; }
         }
     </style>
 </head>
@@ -395,35 +444,46 @@
         </div>
         
         <div class="auction-layout" id="showcase">
+            <!-- SOLD OVERLAY -->
+            <div class="sold-stamp-container">
+                <div class="sold-stamp">SOLD</div>
+            </div>
+
             <div class="player-visual">
-                <div class="sold-stamp-container">
-                    <div class="sold-stamp">SOLD</div>
+                <div class="player-img-wrapper">
+                    <img id="p-img" src="" alt="Player" class="player-img">
                 </div>
-                <img id="p-img" src="" alt="Player" class="player-img">
             </div>
             
             <div class="player-info-panel">
-                <span class="auction-tag" id="p-role">ALL ROUNDER</span>
-                <h2 class="auction-name" id="p-name">PLAYER NAME</h2>
+                <div>
+                    <span class="auction-tag" id="p-role">ALL ROUNDER</span>
+                    <h2 class="auction-name" id="p-name">PLAYER NAME</h2>
+                    <p class="auction-quote" id="p-quote">"Player description will appear here"</p>
+                </div>
                 
-                <div class="stat-row">
-                    <span class="stat-label">BASE PRICE</span>
-                    <span class="stat-val">200 BDT</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">CURRENT BID</span>
-                    <span class="stat-val bid-val" id="current-bid">200 BDT</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">ID CODE</span>
-                    <span class="stat-val" style="font-family: monospace; opacity: 0.7;" id="p-code">000</span>
-                </div>
+                <div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">BASE PRICE</span>
+                            <span class="stat-val" id="base-price">200</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">CURRENT BID</span>
+                            <span class="stat-val bid-active" id="current-bid">200</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ID CODE</span>
+                            <span class="stat-val" style="font-size: 1.5rem; opacity: 0.8;" id="p-code">000</span>
+                        </div>
+                    </div>
 
-                <div class="auction-controls">
-                    <button class="ctrl-btn btn-bid" onclick="simulateBid()">BID +50</button>
-                    <button class="ctrl-btn btn-sold" onclick="markSold()">MARK SOLD</button>
-                    <button class="ctrl-btn" onclick="prevPlayer()">PREV</button>
-                    <button class="ctrl-btn" onclick="nextPlayer()">NEXT</button>
+                    <div class="auction-controls">
+                        <button class="ctrl-btn btn-nav" onclick="prevPlayer()"><i data-lucide="chevron-left"></i></button>
+                        <button class="ctrl-btn btn-nav" onclick="nextPlayer()"><i data-lucide="chevron-right"></i></button>
+                        <button class="ctrl-btn btn-bid" onclick="simulateBid()">BID +50</button>
+                        <button class="ctrl-btn btn-sold" onclick="markSold()">CONFIRM SALE</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -502,6 +562,7 @@
                         <span class="rule-card-title">${cat}</span>
                     </div>
                     ${cats[cat].map(r => {
+                        // Format Bullets
                         let detail = r.detail || "";
                         if(detail.includes('•') || detail.includes('\n')) {
                             const items = detail.split(/•|\n/).filter(x => x.trim());
@@ -524,8 +585,14 @@
 
         function renderPlayer() {
             if (!allData.players || !allData.players.length) return;
-            const p = allData.players[currentIdx];
             
+            // Safety Check for Index
+            if (currentIdx < 0) currentIdx = 0;
+            if (currentIdx >= allData.players.length) currentIdx = allData.players.length - 1;
+
+            const p = allData.players[currentIdx];
+            if (!p) return;
+
             // Safe DOM updates
             const els = {
                 name: document.getElementById('p-name'),
@@ -533,18 +600,22 @@
                 code: document.getElementById('p-code'),
                 img: document.getElementById('p-img'),
                 bid: document.getElementById('current-bid'),
+                base: document.getElementById('base-price'),
+                quote: document.getElementById('p-quote'),
                 showcase: document.getElementById('showcase')
             };
 
             if(els.name) els.name.innerText = p.name;
             if(els.role) els.role.innerText = p.role;
+            if(els.quote) els.quote.innerText = `"${p.note || ''}"`;
+            if(els.base) els.base.innerText = (p.price || 200);
             
             const imgCode = p.img_code || "default";
             if(els.code) els.code.innerText = (imgCode + "-00" + (currentIdx + 1)).toUpperCase();
             if(els.img) els.img.src = `https://placehold.co/600x800/0e1016/00f3ff?text=${imgCode}`;
             
             currentBid = p.price || 200;
-            if(els.bid) els.bid.innerText = currentBid + " BDT";
+            if(els.bid) els.bid.innerText = currentBid;
             
             if(els.showcase) {
                 els.showcase.classList.remove('is-sold');
@@ -552,13 +623,13 @@
             }
         }
 
-        function nextPlayer() { if(currentIdx < allData.players.length - 1) { currentIdx++; renderPlayer(); } }
+        function nextPlayer() { if(allData.players && currentIdx < allData.players.length - 1) { currentIdx++; renderPlayer(); } }
         function prevPlayer() { if(currentIdx > 0) { currentIdx--; renderPlayer(); } }
         
         function simulateBid() { 
             if(document.getElementById('showcase').classList.contains('is-sold')) return;
             currentBid += 50; 
-            document.getElementById('current-bid').innerText = currentBid + " BDT"; 
+            document.getElementById('current-bid').innerText = currentBid; 
         }
         
         function markSold() {
