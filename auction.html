@@ -15,7 +15,7 @@
     <style>
         /* --- CSS VARIABLES & GLOBAL STYLES --- */
         :root {
-            --bg-dark: #0a0b10; /* Deep dark background */
+            --bg-dark: #0a0b10;
             --card-bg: rgba(20, 25, 35, 0.7);
             --accent-primary: #00f3ff; /* Cyan */
             --accent-secondary: #9d4edd; /* Purple */
@@ -44,8 +44,6 @@
         /* Typography */
         .font-heading { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         .font-tech { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
-        .text-accent { color: var(--accent-primary); }
-        .text-purple { color: var(--accent-secondary); }
         
         .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
         .hidden { display: none !important; }
@@ -292,7 +290,7 @@
         </div>
         <div class="timeline-container" id="schedule-list">
             <div class="timeline-line"></div>
-            <!-- Dynamic Content -->
+            <!-- Hardcoded Schedule for Speed -->
         </div>
     </section>
 
@@ -319,14 +317,35 @@
     </section>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbzZCJhGHIOTw5yPZHjPm4akSNWaJzBehQ5m97KoabTFvlw8ObrrID-gi3ZHsrR51GKE/exec"; 
-        
-        // HARDCODED TEAM DATA FROM IMAGE
-        const fixedTeams = [
+        // --- HARDCODED CORE DATA FOR SPEED ---
+        const scheduleData = [
+            { time: "06:30 AM", event: "REPORTING", icon: "map-pin" },
+            { time: "06:30 - 07:10", event: "BREAKFAST", icon: "coffee" },
+            { time: "07:20 - 07:25", event: "OPENING SPEECH", icon: "mic" },
+            { time: "07:30 - 08:30", event: "FOOTBALL (PRELIMS)", icon: "trophy" },
+            { time: "08:40 - 09:20", event: "FUN GAMES", icon: "gamepad-2" },
+            { time: "10:30 - 12:30", event: "CRICKET (PRELIMS)", icon: "target" },
+            { time: "12:30 - 02:00", event: "PRAYER & LUNCH", icon: "utensils" },
+            { time: "02:20 - 03:30", event: "CRICKET FINAL", icon: "crown" },
+            { time: "03:30 - 04:00", event: "FOOTBALL FINAL", icon: "crown" },
+            { time: "04:20 - 05:00", event: "TEACHERS MATCH", icon: "users" }
+        ];
+
+        const rulesData = [
+            { category: "Main Sports", game: "Football", detail: "20 Mins Match (9+9). No Offside. Tie = Penalty." },
+            { category: "Main Sports", game: "Cricket", detail: "8 Overs. 10 Players. Max 3 Overs/Bowler." },
+            { category: "Fun Games", game: "Biscuit Challenge", detail: "Forehead to mouth using facial muscles only." },
+            { category: "Fun Games", game: "Balloon Race", detail: "Run with balloon between knees." },
+            { category: "Fun Games", game: "Dizzy Goal", detail: "Spin 10 times then score." },
+            { category: "Fun Games", game: "Balance Race", detail: "Pair event. Must hold hands." },
+            { category: "Fun Games", game: "Tug of War", detail: "8 vs 8. Pull opponent across middle line." }
+        ];
+
+        const teamsData = [
             {
-                name: "Creatives (26-27)",
-                color: "#ef4444", // Reddish
-                balance: 200,
+                name: "Creatives",
+                color: "#ef4444", 
+                balance: 200, // Points from image
                 players: [
                     { name: "Hasan Mahfuz", price: 9400 },
                     { name: "Zihad Hasan", price: 6000 },
@@ -337,7 +356,7 @@
             },
             {
                 name: "28th Batch",
-                color: "#22c55e", // Greenish
+                color: "#22c55e", 
                 balance: 4800,
                 players: [
                     { name: "Tanvir Ahmad", price: 1000 },
@@ -348,8 +367,8 @@
                 ]
             },
             {
-                name: "Business Ops",
-                color: "#3b82f6", // Blueish
+                name: "Business Operations",
+                color: "#3b82f6", 
                 balance: 2400,
                 players: [
                     { name: "Md. Taraqul Islam", price: 6600 },
@@ -360,7 +379,7 @@
             },
             {
                 name: "29th Batch",
-                color: "#eab308", // Yellowish
+                color: "#eab308", 
                 balance: 3500,
                 players: [
                     { name: "Jabed Omar Jesun", price: 8600 },
@@ -371,44 +390,46 @@
             }
         ];
 
-        let allData = { schedule: [], teams: [], players: [], rules: [] };
+        // *** GOOGLE APPS SCRIPT URL (Optional for Updates) ***
+        // You can use this to fetch UPDATED points if you want dynamic scores later
+        const API_URL = "https://script.google.com/macros/s/AKfycbzZCJhGHIOTw5yPZHjPm4akSNWaJzBehQ5m97KoabTFvlw8ObrrID-gi3ZHsrR51GKE/exec"; 
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             updateCountdown();
             animateParticles();
+            
+            // Render Hardcoded Data Immediately (Fast Load)
+            renderSchedule(scheduleData);
+            renderRules(rulesData);
+            renderTeams(teamsData);
+
+            // Optional: Fetch live points updates silently
             fetchData();
         });
 
         async function fetchData() {
-            const loader = document.getElementById('loader');
             try {
-                // Always render fixed teams first
-                renderTeams(fixedTeams);
-
-                // Fetch dynamic data for Schedule and Rules
                 const response = await fetch(API_URL);
                 const json = await response.json();
-                if (json.status === "success") allData = json.data;
-                else allData = json;
-
-                if(allData.schedule) renderSchedule();
-                if(allData.rules) renderRules();
                 
+                // If you want to update points dynamically from sheet, you can logic here
+                // For now, we stick to the hardcoded final teams as requested
+                
+                // Hide loader immediately as we rendered static data
+                const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 500);
             } catch (e) { 
-                console.error(e);
-                // Even if fetch fails, remove loader so teams are visible
+                console.log("Using static data");
+                const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 500);
             }
         }
 
-        function renderSchedule() {
-            const list = document.getElementById('schedule-list');
-            if(!list || !allData.schedule) return;
-            list.innerHTML = allData.schedule.map(item => `
+        function renderSchedule(data) {
+            document.getElementById('schedule-list').innerHTML = data.map(item => `
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -419,16 +440,13 @@
             `).join('');
         }
 
-        function renderTeams(teamsToRender) {
-            const list = document.getElementById('teams-list');
-            if(!list) return;
-            
-            list.innerHTML = teamsToRender.map((team, i) => `
+        function renderTeams(data) {
+            document.getElementById('teams-list').innerHTML = data.map((team, i) => `
                 <div class="team-roster-card">
                     <div class="team-roster-header" style="border-left: 4px solid ${team.color}">
                         <div class="roster-team-name" style="color:${team.color}">${team.name}</div>
                         <div class="roster-balance">
-                            <span class="balance-label">REMAINING:</span>
+                            <span class="balance-label">POINTS:</span>
                             ${team.balance}
                         </div>
                     </div>
@@ -456,39 +474,27 @@
             `).join('');
         }
 
-        function renderRules() {
-            const list = document.getElementById('rules-list');
-            if(!list || !allData.rules) return;
-
+        function renderRules(data) {
             const cats = {};
-            allData.rules.forEach(r => {
+            data.forEach(r => {
                 const c = r.category || 'General';
                 if(!cats[c]) cats[c] = [];
                 cats[c].push(r);
             });
 
-            list.innerHTML = Object.keys(cats).map(cat => `
+            document.getElementById('rules-list').innerHTML = Object.keys(cats).map(cat => `
                 <div class="rule-card">
                     <div class="rule-card-header">
                         <i data-lucide="shield" class="rule-icon"></i>
                         <span class="rule-card-title">${cat}</span>
                     </div>
-                    ${cats[cat].map(r => {
-                        let detail = r.detail || "";
-                        if(detail.includes('•') || detail.includes('\n')) {
-                            const items = detail.split(/•|\n/).filter(x => x.trim());
-                            detail = `<ul style="list-style:disc; padding-left:1rem; color:var(--text-muted); font-size:0.9rem;">${items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
-                        } else {
-                            detail = `<p>${detail}</p>`;
-                        }
-                        return `
+                    ${cats[cat].map(r => `
                         <div class="rule-list-item">
                             <div class="rule-list-content">
                                 <h4>${r.game}</h4>
-                                ${detail}
+                                <p>${r.detail}</p>
                             </div>
-                        </div>`;
-                    }).join('')}
+                        </div>`).join('')}
                 </div>
             `).join('');
             lucide.createIcons();
@@ -506,13 +512,10 @@
         function updateCountdown() {
             const diff = new Date("Nov 24, 2025 07:30:00").getTime() - new Date().getTime();
             if(diff > 0) {
-                const d = document.getElementById("d");
-                if(d) {
-                    d.innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-                }
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
             }
         }
         setInterval(updateCountdown, 1000);
