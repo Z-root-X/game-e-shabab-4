@@ -36,15 +36,12 @@
             line-height: 1.6;
         }
 
-        /* Subtle Background Pattern */
         #canvas-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.15;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15; pointer-events: none;
         }
 
-        /* Typography Utilities */
+        /* Typography */
         .font-heading { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         .font-tech { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
         .text-accent { color: var(--accent-primary); }
@@ -63,10 +60,7 @@
             padding: 1rem 0;
         }
 
-        .nav-container {
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .logo-container { display: flex; align-items: center; gap: 12px; }
         .nav-logo-img { height: 32px; width: auto; filter: brightness(1.2); }
         .logo-text {
@@ -97,18 +91,18 @@
         }
 
         .hero-logo-main {
-            max-width: 160px; margin-bottom: 2.5rem;
-            filter: drop-shadow(0 0 40px rgba(255,255,255,0.1));
-            opacity: 0.9;
+            max-width: 180px; margin-bottom: 2.5rem;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+            animation: float 4s ease-in-out infinite;
         }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 10px;
             padding: 8px 24px; background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 50px;
             font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 3px;
-            color: #eab308; /* Gold */ margin-bottom: 2rem;
-            font-size: 0.9rem; text-transform: uppercase;
+            color: #eab308; margin-bottom: 2rem; font-size: 0.9rem; text-transform: uppercase;
         }
 
         .hero-title {
@@ -120,8 +114,7 @@
         }
         
         .hero-title-accent {
-            color: transparent;
-            -webkit-text-stroke: 2px var(--accent-primary);
+            color: transparent; -webkit-text-stroke: 2px var(--accent-primary);
             background: none; -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
         }
@@ -131,7 +124,7 @@
             margin: 0 auto 3rem; font-weight: 300;
         }
 
-        /* Clean Countdown */
+        /* Countdown */
         .countdown-grid { display: flex; gap: 3rem; margin-bottom: 4rem; }
         .count-item { text-align: center; }
         .count-val {
@@ -143,7 +136,7 @@
             letter-spacing: 2px; margin-top: 0.5rem;
         }
 
-        /* Primary Button */
+        /* Button */
         .btn-primary {
             background: var(--text-white); color: #000;
             padding: 1rem 2.5rem; font-family: 'Rajdhani', sans-serif; font-weight: 700;
@@ -157,178 +150,70 @@
             box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
         }
 
-        /* --- SECTIONS: GENERAL --- */
+        /* --- SECTIONS --- */
         .section-header { margin-bottom: 4rem; text-align: center; }
         .section-title {
             font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 700;
             color: var(--text-white); margin-bottom: 0.5rem;
         }
-        .section-subtitle { color: var(--text-muted); font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--accent-primary); }
+        .section-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--accent-primary); }
 
-        /* --- TIMELINE (Clean Tree) --- */
+        /* --- TIMELINE --- */
         .timeline-container { position: relative; max-width: 900px; margin: 0 auto; padding: 2rem 0; }
-        .timeline-line {
-            position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
-            background: rgba(255,255,255,0.1); transform: translateX(-50%);
-        }
+        .timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(255,255,255,0.1); transform: translateX(-50%); }
         .timeline-item { position: relative; margin-bottom: 3rem; width: 100%; }
-        .timeline-dot {
-            position: absolute; left: 50%; top: 0; width: 16px; height: 16px;
-            background: var(--bg-dark); border: 2px solid var(--accent-primary);
-            border-radius: 50%; transform: translate(-50%, 5px); z-index: 2;
-            box-shadow: 0 0 15px var(--accent-primary);
-        }
-        .timeline-content {
-            width: 45%; background: rgba(255,255,255,0.03); padding: 1.5rem;
-            border: 1px solid var(--border-color); border-radius: 8px;
-            transition: 0.3s;
-        }
+        .timeline-dot { position: absolute; left: 50%; top: 0; width: 16px; height: 16px; background: var(--bg-dark); border: 2px solid var(--accent-primary); border-radius: 50%; transform: translate(-50%, 5px); z-index: 2; box-shadow: 0 0 15px var(--accent-primary); }
+        .timeline-content { width: 45%; background: rgba(255,255,255,0.03); padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 8px; transition: 0.3s; }
         .timeline-content:hover { border-color: var(--accent-primary); background: rgba(255,255,255,0.05); }
         .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; text-align: left; }
         .timeline-item:nth-child(even) .timeline-content { margin-right: auto; text-align: right; }
-        
-        .time-badge {
-            display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
-            color: var(--accent-primary); margin-bottom: 0.5rem;
-        }
+        .time-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 0.5rem; }
         .event-title { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
 
         /* --- RULES --- */
         .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
-        .rule-card {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border-color);
-            padding: 2rem; border-radius: 12px; height: 100%;
-        }
-        .rule-card-header { 
-            display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;
-        }
+        .rule-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; height: 100%; }
+        .rule-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
         .rule-icon { color: var(--accent-secondary); }
         .rule-card-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; }
-        
-        .rule-list-item {
-            display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start;
-        }
+        .rule-list-item { display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start; }
         .rule-list-content h4 { font-weight: 700; color: var(--text-white); margin-bottom: 4px; }
         .rule-list-content p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
 
-        /* --- TEAMS --- */
-        .team-card-minimal {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
-            padding: 2rem; border-radius: 12px; text-align: center; transition: 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .team-card-minimal:hover { transform: translateY(-5px); border-color: var(--accent-primary); }
-        .team-rank {
-            font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900;
-            color: rgba(255,255,255,0.05); position: absolute; top: -10px; right: 10px;
-        }
-        .team-name { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .team-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-top: 1rem; }
-        .team-points { font-size: 3rem; font-weight: 700; margin-top: 1.5rem; color: var(--text-white); }
-        .points-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
-
-        /* --- AUCTION (Clean) --- */
-        .auction-layout {
-            display: grid; grid-template-columns: 400px 1fr; gap: 0;
-            background: rgba(15, 20, 30, 0.8); border: 1px solid var(--border-color);
-            border-radius: 24px; overflow: hidden; min-height: 600px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;
-        }
+        /* --- TEAMS (UPDATED SQUAD CARDS) --- */
+        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
         
-        /* Decorative glow behind card */
-        .auction-layout::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.05), transparent 60%);
-            z-index: -1; animation: pulse-bg 5s infinite alternate;
+        .team-roster-card {
+            background: rgba(20, 25, 35, 0.6); border: 1px solid var(--border-color);
+            border-radius: 16px; overflow: hidden; transition: 0.3s;
+            backdrop-filter: blur(10px); position: relative;
         }
+        .team-roster-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
         
-        @keyframes pulse-bg { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+        .team-roster-header {
+            padding: 1.5rem; background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .roster-team-name { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; }
+        .roster-balance { 
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; 
+            background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 4px;
+            color: var(--accent-primary);
+        }
+        .balance-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-right: 5px; }
 
-        .player-visual {
-            background: linear-gradient(180deg, #0f1520 0%, #050510 100%);
-            display: flex; align-items: center; justify-content: center;
-            position: relative; border-right: 1px solid var(--border-color);
-            padding: 2rem;
+        .team-roster-body { padding: 1.5rem; }
+        .roster-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .roster-table th { 
+            text-align: left; color: var(--text-muted); padding-bottom: 0.8rem; 
+            font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
         }
-        
-        .player-img-wrapper {
-            width: 100%; height: 100%; max-height: 450px;
-            border-radius: 16px; overflow: hidden; position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .player-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .player-visual:hover .player-img { transform: scale(1.05); }
-
-        .player-info-panel {
-            padding: 3rem; display: flex; flex-direction: column; justify-content: space-between;
-            position: relative; background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
-        }
-
-        .player-header { margin-bottom: 2rem; }
-        .auction-tag { 
-            display: inline-block; background: var(--accent-secondary); color: white;
-            font-weight: 700; letter-spacing: 1px; font-size: 0.8rem; 
-            padding: 6px 16px; border-radius: 4px; margin-bottom: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .auction-name { 
-            font-family: 'Orbitron', sans-serif; font-size: 3.5rem; line-height: 1; 
-            margin-bottom: 0.5rem; background: linear-gradient(to right, #fff, #aaa);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .auction-quote { font-style: italic; color: var(--text-muted); font-size: 1.1rem; border-left: 3px solid var(--accent-primary); padding-left: 1rem; }
-
-        .stats-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; 
-            margin-bottom: 2rem; padding: 1.5rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
-        }
-        .stat-item { text-align: left; }
-        .stat-label { color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 5px; }
-        .stat-val { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-white); }
-        .bid-active { color: var(--accent-primary); text-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
-
-        .auction-controls { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: auto; }
-        .ctrl-btn {
-            padding: 1.2rem; border: 1px solid var(--border-color); cursor: pointer;
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem;
-            transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px;
-            border-radius: 8px; color: white; background: rgba(255,255,255,0.05);
-        }
-        .ctrl-btn:hover { transform: translateY(-2px); }
-        .btn-nav { grid-column: span 1; }
-        .btn-nav:hover { background: rgba(255,255,255,0.1); }
-        
-        .btn-bid { 
-            grid-column: span 3; background: linear-gradient(90deg, var(--accent-primary), #0099ff); 
-            border: none; color: #000; font-weight: 800; font-size: 1.3rem;
-        }
-        .btn-bid:hover { box-shadow: 0 0 20px rgba(0, 243, 255, 0.4); }
-
-        .btn-sold { 
-            grid-column: span 3; background: linear-gradient(90deg, #ff4757, #ff0000); 
-            border: none; color: #fff; font-weight: 800; font-size: 1.3rem;
-        }
-        .btn-sold:hover { box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); }
-
-        /* Sold Overlay */
-        .sold-stamp-container {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 10;
-            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s;
-            backdrop-filter: blur(5px);
-        }
-        .sold-stamp {
-            font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; color: #ff4757;
-            border: 8px solid #ff4757; padding: 1rem 3rem; transform: rotate(-15deg) scale(1.5);
-            text-shadow: 0 0 30px rgba(255, 71, 87, 0.5); opacity: 0; transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        /* CSS for Sold State: Ensure it blocks clicks on buttons below if desired, or allow them */
-        .is-sold .sold-stamp-container { opacity: 1; pointer-events: none; /* Allow clicks through to nav if needed, but block card interaction */ }
-        /* Actually we want to block interaction with BID/SOLD buttons but allow NEXT/PREV. 
-           Ideally, we just overlay the card content. */
-        .is-sold .sold-stamp { opacity: 1; transform: rotate(-15deg) scale(1); }
+        .roster-table td { padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-white); }
+        .roster-table tr:last-child td { border-bottom: none; }
+        .player-price-tag { color: var(--accent-secondary); font-family: 'Rajdhani', sans-serif; font-weight: 700; text-align: right; }
+        .player-sl { color: var(--text-muted); width: 30px; }
 
         /* Loader */
         #loader { position: fixed; inset: 0; background: var(--bg-dark); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s; }
@@ -343,13 +228,7 @@
             .timeline-content { width: 85%; text-align: left !important; margin-left: 2rem !important; }
             .timeline-line { left: 10px; }
             .timeline-dot { left: 10px; }
-            
-            .auction-layout { grid-template-columns: 1fr; height: auto; min-height: auto; }
-            .player-visual { height: 350px; border-right: none; border-bottom: 1px solid var(--border-color); }
-            .player-info-panel { padding: 1.5rem; }
-            .auction-name { font-size: 2rem; }
-            .auction-controls { grid-template-columns: 1fr 1fr; }
-            .btn-bid, .btn-sold { grid-column: span 2; }
+            .teams-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -374,7 +253,6 @@
                 <button class="nav-btn" onclick="switchTab('schedule')">Schedule</button>
                 <button class="nav-btn" onclick="switchTab('rules')">Rules</button>
                 <button class="nav-btn" onclick="switchTab('teams')">Teams</button>
-                <button class="nav-btn" onclick="switchTab('auction')">Auction</button>
             </div>
         </div>
     </nav>
@@ -392,7 +270,7 @@
             </h1>
             
             <p class="hero-desc">
-                Experience the ultimate inter-batch tournament. Where skill meets passion, and champions are forged.
+                The ultimate inter-batch cyber-physical tournament organized by <span class="text-white font-bold">As-Sunnah Skill Development Institute</span>.
             </p>
 
             <div class="countdown-grid">
@@ -402,7 +280,7 @@
                 <div class="count-item"><div class="count-val" id="s">00</div><div class="count-label">Seconds</div></div>
             </div>
 
-            <button onclick="switchTab('auction')" class="btn-primary">ENTER AUCTION</button>
+            <button onclick="switchTab('teams')" class="btn-primary">VIEW SQUADS</button>
         </div>
     </section>
 
@@ -433,71 +311,67 @@
     <section id="teams" class="container hidden">
         <div class="section-header">
             <div class="section-subtitle">LEADERBOARD</div>
-            <h2 class="section-title">BATCH STANDINGS</h2>
+            <h2 class="section-title">FINAL SQUADS</h2>
         </div>
-        <div id="teams-list" class="rules-grid">
-            <!-- Dynamic Content -->
-        </div>
-    </section>
-
-    <!-- AUCTION SECTION -->
-    <section id="auction" class="container hidden">
-        <div class="section-header" style="margin-bottom: 2rem;">
-            <div class="section-subtitle">LIVE BIDDING</div>
-            <h2 class="section-title">PLAYER AUCTION</h2>
-        </div>
-        
-        <div class="auction-layout" id="showcase">
-            <!-- SOLD OVERLAY -->
-            <div class="sold-stamp-container">
-                <div class="sold-stamp">SOLD</div>
-            </div>
-
-            <div class="player-visual">
-                <div class="player-img-wrapper">
-                    <img id="p-img" src="" alt="Player" class="player-img">
-                </div>
-            </div>
-            
-            <div class="player-info-panel">
-                <div>
-                    <span class="auction-tag" id="p-role">ALL ROUNDER</span>
-                    <h2 class="auction-name" id="p-name">PLAYER NAME</h2>
-                    <p class="auction-quote" id="p-quote">"Player description will appear here"</p>
-                </div>
-                
-                <div>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-label">BASE PRICE</span>
-                            <span class="stat-val" id="base-price">200</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">CURRENT BID</span>
-                            <span class="stat-val bid-active" id="current-bid">200</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">ID CODE</span>
-                            <span class="stat-val" style="font-size: 1.5rem; opacity: 0.8;" id="p-code">000</span>
-                        </div>
-                    </div>
-
-                    <div class="auction-controls">
-                        <button class="ctrl-btn btn-nav" onclick="prevPlayer()"><i data-lucide="chevron-left"></i></button>
-                        <button class="ctrl-btn btn-nav" onclick="nextPlayer()"><i data-lucide="chevron-right"></i></button>
-                        <button class="ctrl-btn btn-bid" onclick="simulateBid()">BID +50</button>
-                        <button class="ctrl-btn btn-sold" onclick="markSold()">CONFIRM SALE</button>
-                    </div>
-                </div>
-            </div>
+        <div id="teams-list" class="teams-grid">
+            <!-- Dynamic Content populated from JS -->
         </div>
     </section>
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzZCJhGHIOTw5yPZHjPm4akSNWaJzBehQ5m97KoabTFvlw8ObrrID-gi3ZHsrR51GKE/exec"; 
+        
+        // HARDCODED TEAM DATA FROM IMAGE
+        const fixedTeams = [
+            {
+                name: "Creatives (26-27)",
+                color: "#ef4444", // Reddish
+                balance: 200,
+                players: [
+                    { name: "Hasan Mahfuz", price: 9400 },
+                    { name: "Zihad Hasan", price: 6000 },
+                    { name: "Naim Arman", price: 4200 },
+                    { name: "Saiful Azam", price: 200 },
+                    { name: "Jakir Hossain", price: 0 }
+                ]
+            },
+            {
+                name: "28th Batch",
+                color: "#22c55e", // Greenish
+                balance: 4800,
+                players: [
+                    { name: "Tanvir Ahmad", price: 1000 },
+                    { name: "Naim Ahmed", price: 1300 },
+                    { name: "Ishak Munshi", price: 12400 },
+                    { name: "Md Ashiq", price: 500 },
+                    { name: "Kamrul Islam", price: 0 }
+                ]
+            },
+            {
+                name: "Business Ops",
+                color: "#3b82f6", // Blueish
+                balance: 2400,
+                players: [
+                    { name: "Md. Taraqul Islam", price: 6600 },
+                    { name: "Md Fajle Rabbi", price: 6000 },
+                    { name: "Md. Akash Miah", price: 5000 },
+                    { name: "Shariar Kabir", price: 0 }
+                ]
+            },
+            {
+                name: "29th Batch",
+                color: "#eab308", // Yellowish
+                balance: 3500,
+                players: [
+                    { name: "Jabed Omar Jesun", price: 8600 },
+                    { name: "Abdullah As Sakib", price: 7200 },
+                    { name: "Md. Abul Khayer", price: 700 },
+                    { name: "Mehedi Hasan", price: 0 }
+                ]
+            }
+        ];
+
         let allData = { schedule: [], teams: [], players: [], rules: [] };
-        let currentIdx = 0;
-        let currentBid = 200;
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
@@ -509,26 +383,32 @@
         async function fetchData() {
             const loader = document.getElementById('loader');
             try {
+                // Always render fixed teams first
+                renderTeams(fixedTeams);
+
+                // Fetch dynamic data for Schedule and Rules
                 const response = await fetch(API_URL);
                 const json = await response.json();
                 if (json.status === "success") allData = json.data;
                 else allData = json;
 
                 if(allData.schedule) renderSchedule();
-                if(allData.teams) renderTeams();
                 if(allData.rules) renderRules();
-                if(allData.players && allData.players.length > 0) renderPlayer();
                 
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 500);
             } catch (e) { 
                 console.error(e);
-                loader.innerHTML = `<div style="color:red">Failed to load data</div>`;
+                // Even if fetch fails, remove loader so teams are visible
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
             }
         }
 
         function renderSchedule() {
-            document.getElementById('schedule-list').innerHTML += allData.schedule.map(item => `
+            const list = document.getElementById('schedule-list');
+            if(!list || !allData.schedule) return;
+            list.innerHTML = allData.schedule.map(item => `
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -539,19 +419,47 @@
             `).join('');
         }
 
-        function renderTeams() {
-            document.getElementById('teams-list').innerHTML = allData.teams.map((team, i) => `
-                <div class="team-card-minimal">
-                    <span class="team-rank">0${i+1}</span>
-                    <h3 class="team-name" style="color:${team.color}">${team.name}</h3>
-                    <span class="team-tag">${team.tags}</span>
-                    <div class="team-points">${team.points}</div>
-                    <div class="points-label">POINTS</div>
+        function renderTeams(teamsToRender) {
+            const list = document.getElementById('teams-list');
+            if(!list) return;
+            
+            list.innerHTML = teamsToRender.map((team, i) => `
+                <div class="team-roster-card">
+                    <div class="team-roster-header" style="border-left: 4px solid ${team.color}">
+                        <div class="roster-team-name" style="color:${team.color}">${team.name}</div>
+                        <div class="roster-balance">
+                            <span class="balance-label">REMAINING:</span>
+                            ${team.balance}
+                        </div>
+                    </div>
+                    <div class="team-roster-body">
+                        <table class="roster-table">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>PLAYER NAME</th>
+                                    <th style="text-align:right">PRICE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${team.players.map((p, idx) => `
+                                    <tr>
+                                        <td class="player-sl">${idx + 1}</td>
+                                        <td>${p.name}</td>
+                                        <td class="player-price-tag">${p.price > 0 ? p.price : '-'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             `).join('');
         }
 
         function renderRules() {
+            const list = document.getElementById('rules-list');
+            if(!list || !allData.rules) return;
+
             const cats = {};
             allData.rules.forEach(r => {
                 const c = r.category || 'General';
@@ -559,14 +467,13 @@
                 cats[c].push(r);
             });
 
-            document.getElementById('rules-list').innerHTML = Object.keys(cats).map(cat => `
+            list.innerHTML = Object.keys(cats).map(cat => `
                 <div class="rule-card">
                     <div class="rule-card-header">
                         <i data-lucide="shield" class="rule-icon"></i>
                         <span class="rule-card-title">${cat}</span>
                     </div>
                     ${cats[cat].map(r => {
-                        // Format Bullets
                         let detail = r.detail || "";
                         if(detail.includes('•') || detail.includes('\n')) {
                             const items = detail.split(/•|\n/).filter(x => x.trim());
@@ -587,65 +494,10 @@
             lucide.createIcons();
         }
 
-        function renderPlayer() {
-            if (!allData.players || !allData.players.length) return;
-            
-            // Safety Check for Index
-            if (currentIdx < 0) currentIdx = 0;
-            if (currentIdx >= allData.players.length) currentIdx = allData.players.length - 1;
-
-            const p = allData.players[currentIdx];
-            if (!p) return;
-
-            // Safe DOM updates
-            const els = {
-                name: document.getElementById('p-name'),
-                role: document.getElementById('p-role'),
-                code: document.getElementById('p-code'),
-                img: document.getElementById('p-img'),
-                bid: document.getElementById('current-bid'),
-                base: document.getElementById('base-price'),
-                quote: document.getElementById('p-quote'),
-                showcase: document.getElementById('showcase')
-            };
-
-            if(els.name) els.name.innerText = p.name;
-            if(els.role) els.role.innerText = p.role;
-            if(els.quote) els.quote.innerText = `"${p.note || ''}"`;
-            if(els.base) els.base.innerText = (p.price || 200);
-            
-            const imgCode = p.img_code || "default";
-            if(els.code) els.code.innerText = (imgCode + "-00" + (currentIdx + 1)).toUpperCase();
-            if(els.img) els.img.src = `https://placehold.co/600x800/0e1016/00f3ff?text=${imgCode}`;
-            
-            currentBid = p.price || 200;
-            if(els.bid) els.bid.innerText = currentBid;
-            
-            if(els.showcase) {
-                els.showcase.classList.remove('is-sold');
-                if(p.status === 'Sold') els.showcase.classList.add('is-sold');
-            }
-        }
-
-        function nextPlayer() { if(allData.players && currentIdx < allData.players.length - 1) { currentIdx++; renderPlayer(); } }
-        function prevPlayer() { if(currentIdx > 0) { currentIdx--; renderPlayer(); } }
-        
-        function simulateBid() { 
-            if(document.getElementById('showcase').classList.contains('is-sold')) return;
-            currentBid += 50; 
-            document.getElementById('current-bid').innerText = currentBid; 
-        }
-        
-        function markSold() {
-            const sc = document.getElementById('showcase');
-            if(sc.classList.contains('is-sold')) return;
-            sc.classList.add('is-sold');
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        }
-
         function switchTab(id) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
+            const target = document.getElementById(id);
+            if(target) target.classList.remove('hidden');
             window.scrollTo(0,0);
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -654,10 +506,13 @@
         function updateCountdown() {
             const diff = new Date("Nov 24, 2025 07:30:00").getTime() - new Date().getTime();
             if(diff > 0) {
-                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                const d = document.getElementById("d");
+                if(d) {
+                    d.innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                }
             }
         }
         setInterval(updateCountdown, 1000);
